@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AIM Ledger Import Dashboard</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+  <h1>AIM Ledger Import Dashboard</h1>
+  <p class="subtitle">Bulk-generate and import randomized ledger data for any AIM site.</p>
+</header>
+
+<main>
+  <form id="run-form">
+    <section class="card">
+      <h2>1. Site</h2>
+      <label>
+        Site URL
+        <input type="url" name="url" required />
+      </label>
+      <div class="row">
+        <label>
+          Username
+          <input type="text" name="username" required />
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" required />
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. Reference Template</h2>
+      <p class="hint">An .xlsx with Account / Name / month columns like a standard ledger export, with no values under the months - accounts and names can be anything. Only the selected month column(s) below get filled in; the year in every month header gets rewritten to match what you pick in step 4, regardless of what year the template itself says.</p>
+      <label class="file-label">
+        <input type="file" name="referenceTemplate" accept=".xlsx,.xls" required />
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>3. Entity Names</h2>
+      <p class="hint">An .xlsx containing just the entity names to run this for (one per row, header optional).</p>
+      <label class="file-label">
+        <input type="file" name="entityNames" accept=".xlsx,.xls" required />
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>4. Period</h2>
+      <label class="year-label">
+        Year
+        <input type="number" name="year" id="year-input" min="2000" max="2100" required />
+      </label>
+      <div class="months-grid" id="months-grid"></div>
+    </section>
+
+    <section class="card">
+      <h2>5. Options</h2>
+      <p class="hint">Every account's selected-month value is randomly generated between Min and Max below - independently for every entity, so no two entities get the same numbers.</p>
+      <div class="row">
+        <label>
+          Fill min
+          <input type="number" name="fillMin" id="fill-min-input" step="1" value="-1000" />
+        </label>
+        <label>
+          Fill max
+          <input type="number" name="fillMax" id="fill-max-input" step="1" value="250000" />
+        </label>
+      </div>
+    </section>
+
+    <button type="submit" id="submit-btn">Start Import</button>
+  </form>
+
+  <section class="card" id="progress-card" hidden>
+    <h2>Progress</h2>
+    <p id="summary-line"></p>
+    <table id="entity-table">
+      <thead><tr><th>Entity</th><th>Status</th><th>Detail</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <a id="download-link" href="#" hidden download>Download results CSV</a>
+    <h3>Log</h3>
+    <pre id="log-console"></pre>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
