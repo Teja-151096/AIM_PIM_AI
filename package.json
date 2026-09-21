@@ -1,0 +1,22 @@
+{
+  "name": "pim_entities",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dashboard": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0",
+    "express": "^5.2.1",
+    "multer": "^2.3.0"
+  }
+}
